@@ -49,12 +49,12 @@ class NoteAdapter : ListAdapter<NoteEntity, NoteAdapter.NoteHolder>(DIFF_CALLBAC
         this.listener = listener
     }
 
-    class NoteHolder : RecyclerView.ViewHolder {
+    inner class NoteHolder : RecyclerView.ViewHolder {
         val textViewTitle : TextView = itemView.findViewById(R.id.text_view_title)
         val textViewDescription: TextView = itemView.findViewById(R.id.text_view_description)
         val textViewPriority : TextView = itemView.findViewById(R.id.text_view_priority)
         //여기서 내가 넣고 있는 notes와 binding이 되면서 들어가는 notes의 값은 다른걸까?
-        constructor(itemView : View, listener: OnItemClickListener) : super(itemView) {
+        constructor(itemView : View) : super(itemView) {
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (listener != null && position != RecyclerView.NO_POSITION) {
@@ -68,7 +68,7 @@ class NoteAdapter : ListAdapter<NoteEntity, NoteAdapter.NoteHolder>(DIFF_CALLBAC
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent,false)
         //여기서 새로운 노트홀더가 생성되는 곳인데.. 그래서 여기에서 데이터가 들어가는 곳인데..
-        return NoteHolder(itemView, listener)
+        return NoteHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
